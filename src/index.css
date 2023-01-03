@@ -1,0 +1,147 @@
+:root {
+    /* Background darker  */
+    --bg-darker-color: #16161a;
+    /* Background grey  */
+    --bg-grey-color: #242629;
+
+    --headers-color: #fffffe;
+
+    /* Paragraphs color */
+    --paragraphs-color: #94a1b2;
+
+
+    /* Buttons colors */
+    --btn-bg-color: #7f5af0;
+    --btn-text-color: #fffffe;
+
+    /* Other colors  */
+    --color-helper-black: #010101;
+    --color-helper-green: #2cb67d;
+    --color-helper-grey: #72757e;
+
+    /* Fonts */
+    --headers-fonts: 'Array', sans-serif;
+    --generals-font: 'Khand', sans-serif;
+    
+    /* ------- */
+    --max-width:75rem;
+    --radius-helper:.3125rem;
+    --transition-deault: all .5s linear;
+}
+
+
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: var(--generals-font);
+    background-color: var(--bg-darker-color);
+    color: var(--paragraphs-color);
+    position: relative;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+h1, h2,h3, h4, h5, h6{
+    letter-spacing: .1rem;
+    text-transform: capitalize;
+    margin-bottom: .75rem;
+    font-family: var(--headers-fonts);
+    color: var(--headers-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+h3{
+    
+    font-size: 1.5rem;
+}
+h4{
+    
+    font-size: 1rem;
+}
+
+h5{
+    
+    font-size: .875rem;
+}
+
+
+
+p {
+    margin-bottom: 1.25rem;
+}
+
+
+/* Some globals classes  */
+
+.text-center{
+    text-align: center;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.section-center {
+    padding: 5rem 0.5rem;
+    width: 90vw;
+    margin: 0 auto;
+    max-width: var(--max-width);
+  }
+
+button ,.btn{
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-helper);
+    background-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+    border: none;
+    font-family: var(--generals-font);
+    letter-spacing: .0625rem;
+    cursor: pointer;
+    transition: var(--transition-deault);
+}
+
+button:hover,.btn{
+    background-color: var(  --bg-grey-color);
+}
+
+.img{
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.bg-hero{
+    background: url('../src/assets/hero-img-2.jpg' );
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and ( min-width:800px ) {
+    .bg-hero{
+        background: url('../src/assets/hero-img.jpg' );
+        opacity: 0.5;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+}

@@ -13,6 +13,7 @@ const NavBar = () => {
     <NavContainer>
       <div className="nav-main">
         <div className="logo"><span>Pain</span>Day<span>Play</span></div>
+        {/* //Todo:mobile menu */}
         <div type="button" className="toggle-btn" > <GiHamburgerMenu /> </div>
           <ul className="links-container" >
             { navLinks.map((l)=>{
@@ -20,8 +21,8 @@ const NavBar = () => {
                 <Link className="link" to={`${l.url}`} >{ l.text }</Link>
               </li>
             }) }
-            {/* //Todo:Funcionalidad login */}
-            <button>Login <BiLogIn /></button>                      
+            {/* //Todo: login/ logout function */}
+            <button className="btn" >Login <BiLogIn /></button>                      
           </ul>
       </div>
     </NavContainer>
@@ -48,13 +49,7 @@ const NavContainer=styled.nav`
     width: 100%;
   }
   
-  .logo{
-    font-size: 1.7rem;
-    font-family: var( --headers-fonts);
-    span{
-      color: var( --btn-bg-color);
-    }
-  }
+ 
   .toggle-btn{
     font-size: 1.4rem;
   }
@@ -72,7 +67,7 @@ const NavContainer=styled.nav`
       .link{
         color: var( --headers-color);
         font-size: 1.3rem;
-        transition: var( --transition-deault);
+        transition: var( --transition-default);
       }
 
       .link:hover{

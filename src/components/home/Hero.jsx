@@ -31,6 +31,9 @@ const BgHeroContainer=styled.section`
         color: white;
         font-size: 2rem;
     }
+    .btn{
+        opacity: 1;
+    }
     
     @media  ( min-width:800px ) {
         h1{

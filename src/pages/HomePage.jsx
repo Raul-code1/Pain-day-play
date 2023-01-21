@@ -1,10 +1,13 @@
-import { Hero } from "../components/home";
+import { FeaturesHomePage, Hero,HomeThirdSection,FourthHomePageSection } from "../components/home";
 
 
 const HomePage = () => {
   return (
     <>
       <Hero />
+      <FeaturesHomePage />
+      <HomeThirdSection />
+      <FourthHomePageSection />
     </>
   );
 };

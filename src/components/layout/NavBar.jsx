@@ -4,17 +4,18 @@ import { Link } from "react-router-dom";
 import { BiLogIn,BiLogOut } from "react-icons/bi";
 
 import {navLinks} from '../../utils/constants'
+import { useDispatch } from "react-redux";
+import { openMenuMobile } from "../../feautres/ui/uiSlice";
 
 const NavBar = () => {
 
-
+  const dispatch=useDispatch();
 
   return (
     <NavContainer>
       <div className="nav-main">
         <div className="logo"><span>Pain</span>Day<span>Play</span></div>
-        {/* //Todo:mobile menu */}
-        <div type="button" className="toggle-btn" > <GiHamburgerMenu /> </div>
+        <div type="button" className="toggle-btn" onClick={()=>dispatch(openMenuMobile())} > <GiHamburgerMenu /> </div>
           <ul className="links-container" >
             { navLinks.map((l)=>{
               return <li key={ l.id } >
@@ -22,7 +23,7 @@ const NavBar = () => {
               </li>
             }) }
             {/* //Todo: login/ logout function */}
-            <button className="btn" >Login <BiLogIn /></button>                      
+            <Link to='/' className="btn" >Login <BiLogIn /></Link>                      
           </ul>
       </div>
     </NavContainer>
@@ -64,15 +65,7 @@ const NavContainer=styled.nav`
       justify-content: space-evenly;
       align-items: center;
       width: 50%;
-      .link{
-        color: var( --headers-color);
-        font-size: 1.3rem;
-        transition: var( --transition-default);
-      }
-
-      .link:hover{
-        color: var( --btn-bg-color);
-      }
+      
     }
     
     .toggle-btn{

@@ -81,7 +81,7 @@ const Wrapper = styled.section`
         }
 
         .btn{
-          width: 40%;
+          width: 50%;
         }
       }
     }

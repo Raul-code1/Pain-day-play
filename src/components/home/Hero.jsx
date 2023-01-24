@@ -8,7 +8,7 @@ const Hero = () => {
         <h1>Con PainDayPlay</h1>
         <p>Economiza en tus instalaciones deportivas con nuestro comparador de precios.</p>
         <p>Empieza a comparar ya</p>
-        <Link to='/instalaciones' className="btn" >Compara Precios</Link>
+        <Link to='/companies' className="btn" >Compara Precios</Link>
     </BgHeroContainer>
   )
 }

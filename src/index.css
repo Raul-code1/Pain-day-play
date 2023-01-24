@@ -19,17 +19,17 @@
     --color-helper-black: #010101;
     --color-helper-green: #2cb67d;
     --color-helper-grey: #72757e;
-    --color-helper-blue:#412b83;
+    --color-helper-blue: #412b83;
 
     /* Fonts */
     --headers-fonts: 'Array', sans-serif;
     --generals-font: 'Khand', sans-serif;
-    
+
     /* ------- */
-    --max-width:75rem;
-    --radius-helper:.3125rem;
+    --max-width: 75rem;
+    --radius-helper: .3125rem;
     --transition-default: all .5s linear;
-    --letter-spacing:1px;
+    --letter-spacing: 1px;
     /* Break points for the app */
     /* Mobile first */
     /* Tabled 800px */
@@ -46,21 +46,27 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: var(--generals-font);
     background-color: var(--bg-darker-color);
     color: var(--paragraphs-color);
     position: relative;
 }
 
-ul{
+ul {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
 }
-h1, h2,h3, h4, h5, h6{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     letter-spacing: .1rem;
     text-transform: capitalize;
     margin-bottom: .75rem;
@@ -72,21 +78,22 @@ h1 {
     font-size: 2.5rem;
 }
 
-h2{
+h2 {
     font-size: 2rem;
 }
 
-h3{
-    
+h3 {
+
     font-size: 1.5rem;
 }
-h4{
-    
+
+h4 {
+
     font-size: 1rem;
 }
 
-h5{
-    
+h5 {
+
     font-size: .875rem;
 }
 
@@ -99,11 +106,11 @@ p {
 
 /* Some globals classes  */
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
-.text-justify{
+.text-justify {
     text-align: justify;
 }
 
@@ -112,10 +119,26 @@ p {
     width: 90vw;
     margin: 0 auto;
     max-width: var(--max-width);
-  }
+}
 
- .btn{
-  padding: 0.625rem 1.25rem;
+
+
+/* Nav links options */
+
+.link {
+    color: var(--headers-color);
+    font-size: 1.3rem;
+    transition: var(--transition-default);
+}
+
+.link:hover {
+    color: var(--btn-bg-color);
+}
+
+/* Buttons */
+
+.btn {
+    padding: 0.625rem 1.25rem;
     border-radius: var(--radius-helper);
     background-color: var(--btn-bg-color);
     color: var(--btn-text-color);
@@ -126,43 +149,43 @@ p {
     transition: var(--transition-default);
 }
 
-.btn:hover{
+.btn:hover {
     background-color: var(--bg-grey-color);
 }
 
-.img{
+.img {
     width: 100%;
     object-fit: cover;
     display: block;
 }
 
-.bg-hero{
-    background: url('../src/assets/hero-img-2.jpg' );
+.bg-hero {
+    background: url('../src/assets/hero-img-2.jpg');
     opacity: 0.7;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.content-hero{
+.content-hero {
     opacity: 1;
 }
 
-@media screen and ( min-width:800px ) {
-    .bg-hero{
-        background: url('../src/assets/hero-img.jpg' );
+@media screen and (min-width:800px) {
+    .bg-hero {
+        background: url('../src/assets/hero-img.jpg');
         background-repeat: no-repeat;
         background-size: cover;
     }
-    
+
 }
 
 /* Logo styles */
-.logo{
+.logo {
     font-size: 1.7rem;
-    font-family: var( --headers-fonts);
-   
-  }
+    font-family: var(--headers-fonts);
 
-.logo span{
-    color: var( --btn-bg-color);
-  }
+}
+
+.logo span {
+    color: var(--btn-bg-color);
+}

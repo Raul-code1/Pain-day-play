@@ -20,17 +20,33 @@ const MobileMenu = () => {
       </div>
       <div className="mobile-menu-links">
         {navLinks.map((l) => (
-          <Link to={l.url} key={l.id} className="link">
+          <Link
+            to={l.url}
+            key={l.id}
+            className="link"
+            onClick={() => dispatch(closeMenuMobile())}
+          >
             {l.text}
           </Link>
         ))}
-        <a href="#" className="link">
+        <a
+          href="https://google.com"
+          target="_blank"
+          className="link"
+          onClick={() => dispatch(closeMenuMobile())}
+        >
           E-commerce
         </a>
       </div>
       <div className="mobile-auth-btn">
         {/* //todo: auth functionality */}
-        <button className="btn">Login</button>
+        <Link
+          className="btn"
+          to="/register"
+          onClick={() => dispatch(closeMenuMobile())}
+        >
+          Login
+        </Link>
       </div>
       <hr />
       <div className="network-icons-mobile">

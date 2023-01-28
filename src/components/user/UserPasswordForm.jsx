@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import styled from "styled-components";
+import { updatePasswordUserThunk } from "../../feautres/user/userThunk";
 
 import InputComponent from "../layout/InputComponent";
 
@@ -9,14 +12,19 @@ const UserPasswordForm = () => {
     newPassword: "",
   });
 
-  const handlePasswordChange = ({ targer }) => {
-    let name = targer.name;
-    let value = targer.value;
+  const dispatch=useDispatch();
+
+  const handlePasswordChange = ({ target }) => {
+    let name = target.name;
+    let value = target.value;
     setUpdatePassword({ ...updatePassword, [name]: value });
   };
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
+    const {password ,newPassword}=updatePassword
+    if (!password || !newPassword) return toast.error('Por favor rellena todos los campos');
+    dispatch(updatePasswordUserThunk({password,newPassword}))
   };
 
   return (
@@ -25,7 +33,7 @@ const UserPasswordForm = () => {
       <form onSubmit={handlePasswordSubmit} className="password-user-form">
         <InputComponent
           labelText="Contraseña actual"
-          type="text"
+          type="password"
           name="password"
           value={updatePassword.password}
           onChange={handlePasswordChange}
@@ -33,7 +41,7 @@ const UserPasswordForm = () => {
         />
         <InputComponent
           labelText="Contraseña nueva"
-          type="text"
+          type="password"
           name="newPassword"
           value={updatePassword.newPassword}
           onChange={handlePasswordChange}

@@ -4,17 +4,18 @@ import styled from "styled-components";
 
 import { getSingleUserThunk } from "../feautres/user/userThunk";
 import { UserPasswordForm, UserProfileForm } from "../components/user";
+import { Loading } from "../components/layout";
 
 const ProfileUserPage = () => {
   const dispatch = useDispatch();
-  const { isLoading, userProfile } = useSelector((store) => store.user);
+  const { user,isLoading, userProfile } = useSelector((store) => store.user);
 
   useEffect(() => {
     dispatch(getSingleUserThunk());
-  }, []);
+  }, [user]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (
@@ -36,6 +37,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   h5 {
     font-size: 30px;
+    margin-bottom: 1.25rem;
     span {
       color: var(--btn-bg-color);
     }

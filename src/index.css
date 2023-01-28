@@ -197,3 +197,18 @@ p {
 .logo span {
     color: var(--btn-bg-color);
 }
+
+/* Loading  */
+@keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    animation: spinner 1s linear infinite;
+  }
+ 

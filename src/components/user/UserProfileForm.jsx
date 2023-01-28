@@ -1,12 +1,14 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import styled from "styled-components"
 
 
 import InputComponent from "../layout/InputComponent"
+import { updateUserThunk,getSingleUserThunk } from "../../feautres/user/userThunk"
 
 const UserProfileForm = () => {
+  const dispatch=useDispatch();
   const {userProfile }=useSelector((store)=>store.user)
 
   const [tempUser, setTempUser] = useState({
@@ -24,12 +26,14 @@ const UserProfileForm = () => {
   const handleProfileSubmit=(e)=>{
     e.preventDefault();
     const {name ,username ,email}=tempUser
-    if (!name || !username || !email) toast.error('Por favor rellena todos los campos')
+    if (!name || !username || !email) return toast.error('Por favor rellena todos los campos')
+
+    dispatch(updateUserThunk({name,username,email}));
   }
 
   return (
     <Wrapper>
-      <p>Actualiza tus informacion cuando lo desees</p>
+      <p>Actualiza tu informacion cuando lo desees</p>
       <form onSubmit={handleProfileSubmit} className="profile-form">
         <InputComponent
           labelText='Nombre'

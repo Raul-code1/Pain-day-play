@@ -41,7 +41,7 @@ const NavBar = () => {
             </Link>
           )}
           {user && isUserLoggedOut!=='logout' ? (
-            <Link to='/' className="btn" onClick={()=>{dispatch(logout())}} >
+            <Link to='/' className="btn" onClick={()=>{dispatch(logout('Nos vemos pronto 🚀'))}} >
               Logout <BiLogOut />
             </Link>
           ) : (

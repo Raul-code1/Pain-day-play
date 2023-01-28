@@ -49,7 +49,7 @@ const MobileMenu = () => {
         {user && isUserLoggedOut!=='logout' ? (
           <Link to='/' className="btn" onClick={() => {
             dispatch(closeMenuMobile())
-            dispatch(logout())
+            dispatch(logout('Nos vemos pronto 🚀'))
           }} >Logout</Link>
         ) : (
           <Link

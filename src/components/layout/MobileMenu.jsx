@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import "../../helpers/styles/MobileMenu.css";
 import { navLinks, networksIcons } from "../../utils/constants";
 import { closeMenuMobile } from "../../feautres/ui/uiSlice";
+import { logout } from "../../feautres/user/userSlice";
 
 const MobileMenu = () => {
   const { isMobileMenuOpen } = useSelector((store) => store.ui);
+  const { user,isUserLoggedOut } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   return (
@@ -29,6 +31,11 @@ const MobileMenu = () => {
             {l.text}
           </Link>
         ))}
+        {user && isUserLoggedOut!=='logout' && (
+          <Link to="/profile" className="link" onClick={() => dispatch(closeMenuMobile())}>
+            Perfil
+          </Link>
+        )}
         <a
           href="https://google.com"
           target="_blank"
@@ -39,14 +46,20 @@ const MobileMenu = () => {
         </a>
       </div>
       <div className="mobile-auth-btn">
-        {/* //todo: auth functionality */}
-        <Link
-          className="btn"
-          to="/register"
-          onClick={() => dispatch(closeMenuMobile())}
-        >
-          Login
-        </Link>
+        {user && isUserLoggedOut!=='logout' ? (
+          <Link to='/' className="btn" onClick={() => {
+            dispatch(closeMenuMobile())
+            dispatch(logout())
+          }} >Logout</Link>
+        ) : (
+          <Link
+            className="btn"
+            to="/register"
+            onClick={() => dispatch(closeMenuMobile())}
+          >
+            Login
+          </Link>
+        )}
       </div>
       <hr />
       <div className="network-icons-mobile">

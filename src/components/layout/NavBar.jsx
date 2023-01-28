@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { BiLogIn, BiLogOut, BiUserPin } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 
 import { navLinks } from "../../utils/constants";
-import { useDispatch } from "react-redux";
 import { openMenuMobile } from "../../feautres/ui/uiSlice";
+import { logout } from "../../feautres/user/userSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-
+  const { user,isUserLoggedOut } = useSelector((store) => store.user);
   return (
     <NavContainer>
       <div className="nav-main">
@@ -34,11 +35,20 @@ const NavBar = () => {
               </li>
             );
           })}
-          {/* //Todo: login/ logout function */}
-          <Link to="/register" className="btn">
-            Login <BiLogIn />
-          </Link>
-          {/* <Link to='/register' className="btn" >Logout <BiLogOut /></Link>*/}
+          {user && isUserLoggedOut!=='logout' && (
+            <Link to="/profile" className="link">
+              Perfil <BiUserPin />
+            </Link>
+          )}
+          {user && isUserLoggedOut!=='logout' ? (
+            <Link to='/' className="btn" onClick={()=>{dispatch(logout())}} >
+              Logout <BiLogOut />
+            </Link>
+          ) : (
+            <Link to="/register" className="btn">
+              Login <BiLogIn />
+            </Link>
+          )}
         </ul>
       </div>
     </NavContainer>

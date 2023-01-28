@@ -5,6 +5,7 @@ import styled from "styled-components"
 const Hero = () => {
   return (
     <BgHeroContainer className="bg-hero text-center" >
+        {/* //todo:Fix the hero title */}
         <h1>Con PainDayPlay</h1>
         <p>Economiza en tus instalaciones deportivas con nuestro comparador de precios.</p>
         <p>Empieza a comparar ya</p>

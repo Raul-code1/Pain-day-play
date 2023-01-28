@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   AboutPage,
@@ -7,6 +9,8 @@ import {
   ErrorPage,
   AllCompanies,
   RegisterPage,
+  ProfileUserPage,
+  ProtectedUserRoutes,
 } from "./pages";
 import { NavBar, Footer, MobileMenu } from "./components/layout";
 
@@ -23,10 +27,27 @@ const App = () => {
           <Route index element={<AllCompanies />} />
         </Route>
         {/* **************** */}
-        <Route path="/register"element={<RegisterPage />}  />
+        <Route path="/register" element={  <RegisterPage />} />
+        <Route
+          path="/Profile"
+          element={
+            <ProtectedUserRoutes>
+              <ProfileUserPage />
+            </ProtectedUserRoutes>
+          }
+        />
+        {/* **************** */}
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </BrowserRouter>
   );
 };

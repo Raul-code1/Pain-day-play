@@ -121,7 +121,11 @@ p {
     max-width: var(--max-width);
 }
 
-
+.section{
+    width: 90vw;
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
 
 /* Nav links options */
 

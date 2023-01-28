@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { InputComponent } from "../components/layout";
+import { registerUserThunk,loginUserThunk } from "../feautres/user/userThunk";
 
 const initialState = {
   name: "",
@@ -12,6 +16,9 @@ const initialState = {
 };
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user,isUserLoggedOut } = useSelector((store) => store.user);
   const [userRegisterPage, setUserRegisterPage] = useState(initialState);
 
   const handleChange = ({ target }) => {
@@ -22,7 +29,26 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password } = userRegisterPage;
+    const { name, email, password, isMember, username } = userRegisterPage;
+    if (
+      !email ||
+      !password  ||
+      (!isMember && !name) ||
+      (!isMember && !username) 
+    ) {
+      toast.error("Por favor rellena todos los datos");
+      return;
+    }
+
+    if (password.length<6) return toast.error('La contraseña debe tener mas de 6 caracteres');
+
+    if (userRegisterPage.isMember) {
+      dispatch(loginUserThunk({ email, password }));
+      setUserRegisterPage({ ...userRegisterPage, isMember: true });
+    } else {
+      dispatch(registerUserThunk({ name, username, email, password }));
+      setUserRegisterPage({ ...userRegisterPage, isMember: false });
+    }
   };
 
   const handleIsMember = () =>
@@ -30,6 +56,14 @@ const RegisterPage = () => {
       ...userRegisterPage,
       isMember: !userRegisterPage.isMember,
     });
+
+   useEffect(() => {
+    if (user && isUserLoggedOut !=='logout') {
+      setTimeout(() => {
+        navigate("/companies");
+      }, 2000);
+    }
+  }, [user,isUserLoggedOut]) ;
 
   return (
     <Wrapper className="section-center">
@@ -72,7 +106,7 @@ const RegisterPage = () => {
             placeholder="********"
           />
           <button type="submit" className="btn">
-            { userRegisterPage.isMember? 'Login':'Registrate'}
+            {userRegisterPage.isMember ? "Login" : "Registrate"}
           </button>
           <p>
             {userRegisterPage.isMember

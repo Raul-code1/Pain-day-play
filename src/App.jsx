@@ -11,6 +11,7 @@ import {
   RegisterPage,
   ProfileUserPage,
   ProtectedUserRoutes,
+  SingleCompany,
 } from "./pages";
 import { NavBar, Footer, MobileMenu } from "./components/layout";
 
@@ -25,6 +26,7 @@ const App = () => {
         {/* **************** */}
         <Route path="/companies" element={<CompaniesPage />}>
           <Route index element={<AllCompanies />} />
+          <Route path="/companies/:id" element={<SingleCompany />} />
         </Route>
         {/* **************** */}
         <Route path="/register" element={  <RegisterPage />} />

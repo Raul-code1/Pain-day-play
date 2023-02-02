@@ -10,7 +10,7 @@ import { logout } from "../../feautres/user/userSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const { user,isUserLoggedOut } = useSelector((store) => store.user);
+  const { user, isUserLoggedOut } = useSelector((store) => store.user);
   return (
     <NavContainer>
       <div className="nav-main">
@@ -26,6 +26,11 @@ const NavBar = () => {
           <GiHamburgerMenu />{" "}
         </div>
         <ul className="links-container">
+        {user?.user.role === "admin" && (
+            <Link to="/admin/dashboard" className="link">
+              Admin Dashboard
+            </Link>
+          )}
           {navLinks.map((l) => {
             return (
               <li key={l.id}>
@@ -35,13 +40,19 @@ const NavBar = () => {
               </li>
             );
           })}
-          {user && isUserLoggedOut!=='logout' && (
+          {user && isUserLoggedOut !== "logout" && (
             <Link to="/profile" className="link">
               Perfil <BiUserPin />
             </Link>
           )}
-          {user && isUserLoggedOut!=='logout' ? (
-            <Link to='/' className="btn" onClick={()=>{dispatch(logout('Nos vemos pronto 🚀'))}} >
+          {user && isUserLoggedOut !== "logout" ? (
+            <Link
+              to="/"
+              className="btn"
+              onClick={() => {
+                dispatch(logout("Nos vemos pronto 🚀"));
+              }}
+            >
               Logout <BiLogOut />
             </Link>
           ) : (

@@ -21,7 +21,7 @@ const ProfileUserPage = () => {
   return (
     <Wrapper className="section">
       <h5>
-        Tu perfil😎: <span>{userProfile?.name}</span>
+        Tu perfil: <span>{userProfile?.name}</span>
       </h5>
       <div className="forms-profile-user-container" >
         <UserProfileForm />

@@ -60,7 +60,7 @@ const RegisterPage = () => {
    useEffect(() => {
     if (user && isUserLoggedOut !=='logout') {
       setTimeout(() => {
-        navigate("/companies");
+        navigate("/profile");
       }, 2000);
     }
   }, [user,isUserLoggedOut]) ;

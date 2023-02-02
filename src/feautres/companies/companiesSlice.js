@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { getAllCompaniesThunk } from "./companiesThunk";
+import { getAllCompaniesThunk,getSingleCompanyThunk } from "./companiesThunk";
 
 const initialState = {
   isLoading: false,
@@ -10,14 +10,17 @@ const initialState = {
     { value: "paintball", label: "Paintball" },
     { value: "airsoft", label: "Airsoft" },
     { value: "laser tag", label: "Laser tag" },
+    { value: "all", label: "Todos" },
   ],
   sortOptions: [
     { value: "pricing", label: "Menor precio" },
     { value: "-pricing", label: "Mayor precio" },
   ],
   totalActiveCompanies:null,
-  activeCategory:'paintball',
+  activeCategory:'all',
   activeSort:'pricing',
+  company:null,
+  comments:[]
 };
 
 export const companiesSlice = createSlice({
@@ -43,6 +46,18 @@ export const companiesSlice = createSlice({
     .addCase(getAllCompaniesThunk.rejected,(state,{payload})=>{
         state.isLoading=false;
         toast.error(payload);
+    })
+    .addCase(getSingleCompanyThunk.pending,(state)=>{
+      state.isLoading=true;
+    })
+    .addCase(getSingleCompanyThunk.fulfilled,(state,{payload})=>{
+      state.isLoading=false;
+      state.company=payload;
+      state.comments=payload.comments;
+    })
+    .addCase(getSingleCompanyThunk.rejected,(state,{payload})=>{
+      state.isLoading=false;
+      toast.error(payload);
     })
   }
 });

@@ -165,6 +165,12 @@ p {
     display: block;
 }
 
+@media ( min-width:800px ) {
+    .img-single-company{
+        transform: translateY(-20%);
+    }
+}
+
 
 /* Just for hero background */
 .bg-hero {

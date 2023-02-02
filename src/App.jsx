@@ -12,6 +12,10 @@ import {
   ProfileUserPage,
   ProtectedUserRoutes,
   SingleCompany,
+  AdminHome,
+  ProtectedAdminRoute,
+  CreateCompany,
+  CompaniesCrud,
 } from "./pages";
 import { NavBar, Footer, MobileMenu } from "./components/layout";
 
@@ -29,7 +33,7 @@ const App = () => {
           <Route path="/companies/:id" element={<SingleCompany />} />
         </Route>
         {/* **************** */}
-        <Route path="/register" element={  <RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/Profile"
           element={
@@ -39,6 +43,18 @@ const App = () => {
           }
         />
         {/* **************** */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedAdminRoute>
+              <AdminHome />
+            </ProtectedAdminRoute>
+          }
+          >
+            <Route index element={<CompaniesCrud />} />
+            <Route path="/admin/dashboard/create-update" element={<CreateCompany />} />
+          </Route>
+          {/* **************** */}
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       <Footer />

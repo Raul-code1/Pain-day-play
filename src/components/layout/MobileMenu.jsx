@@ -9,7 +9,7 @@ import { logout } from "../../feautres/user/userSlice";
 
 const MobileMenu = () => {
   const { isMobileMenuOpen } = useSelector((store) => store.ui);
-  const { user,isUserLoggedOut } = useSelector((store) => store.user);
+  const { user, isUserLoggedOut } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   return (
@@ -31,9 +31,22 @@ const MobileMenu = () => {
             {l.text}
           </Link>
         ))}
-        {user && isUserLoggedOut!=='logout' && (
-          <Link to="/profile" className="link" onClick={() => dispatch(closeMenuMobile())}>
+        {user && isUserLoggedOut !== "logout" && (
+          <Link
+            to="/profile"
+            className="link"
+            onClick={() => dispatch(closeMenuMobile())}
+          >
             Perfil
+          </Link>
+        )}
+        {user?.user.role === "admin" && (
+          <Link
+            onClick={() => dispatch(closeMenuMobile())}
+            to="/admin/dashboard"
+            className="link"
+          >
+            Admin Dashboard
           </Link>
         )}
         <a
@@ -46,11 +59,17 @@ const MobileMenu = () => {
         </a>
       </div>
       <div className="mobile-auth-btn">
-        {user && isUserLoggedOut!=='logout' ? (
-          <Link to='/' className="btn" onClick={() => {
-            dispatch(closeMenuMobile())
-            dispatch(logout('Nos vemos pronto 🚀'))
-          }} >Logout</Link>
+        {user && isUserLoggedOut !== "logout" ? (
+          <Link
+            to="/"
+            className="btn"
+            onClick={() => {
+              dispatch(closeMenuMobile());
+              dispatch(logout("Nos vemos pronto 🚀"));
+            }}
+          >
+            Logout
+          </Link>
         ) : (
           <Link
             className="btn"

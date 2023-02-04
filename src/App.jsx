@@ -14,8 +14,8 @@ import {
   SingleCompany,
   AdminHome,
   ProtectedAdminRoute,
-  CreateCompany,
-  CompaniesCrud,
+  NewOrEditCompany,
+  CompaniesAdmin,
 } from "./pages";
 import { NavBar, Footer, MobileMenu } from "./components/layout";
 
@@ -50,11 +50,14 @@ const App = () => {
               <AdminHome />
             </ProtectedAdminRoute>
           }
-          >
-            <Route index element={<CompaniesCrud />} />
-            <Route path="/admin/dashboard/create-update" element={<CreateCompany />} />
-          </Route>
-          {/* **************** */}
+        >
+          <Route index element={<CompaniesAdmin />} />
+          <Route
+            path="/admin/dashboard/create-update"
+            element={<NewOrEditCompany />}
+          />
+        </Route>
+        {/* **************** */}
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
       <Footer />

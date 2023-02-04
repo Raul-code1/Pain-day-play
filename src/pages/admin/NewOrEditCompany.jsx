@@ -7,10 +7,18 @@ import {
   handleChangeActiveCompany,
   handleChangePricing,
   addPricing,
+  clearActiveAdminCompany,
 } from "../../feautres/userAdmin/userAdminSlice";
+import { UploadImageForm } from "../../components/companies";
+import {
+  createCompanyAdminThunk,
+  updateCompanyAdminThunk,
+} from "../../feautres/userAdmin/userAdminThunk";
 
 const NewOrEditCompany = () => {
-  const { activeAdminCompany } = useSelector((store) => store.userAdmin);
+  const { activeAdminCompany, isEditingCompany } = useSelector(
+    (store) => store.userAdmin
+  );
   const dispatch = useDispatch();
 
   const onChangeFields = ({ target }) => {
@@ -31,13 +39,45 @@ const NewOrEditCompany = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { pricing } = activeAdminCompany;
+    let tempActiveCompany = Object.keys(activeAdminCompany);
+    let validateField = false;
 
-    //todo: toggle edit, and dispatch of  create/update
+    tempActiveCompany.some((keyOption, i) => {
+      if (!activeAdminCompany[keyOption] && !validateField) {
+        validateField = true;
+        return toast.error(`Por favor rellena todo los campos`);
+      }
+    });
+
+    if (pricing.length === 0) {
+      return toast.error("Por favor ingresa al menos 1 plan y precio");
+    }
+
+    pricing.forEach((objectPricing, i) => {
+      if (!objectPricing.planName || objectPricing.price === 0) {
+        return toast.error("Por favor completa bien los campos");
+      }
+    });
+
+    const company = { ...activeAdminCompany };
+
+    if (isEditingCompany) {
+      dispatch(updateCompanyAdminThunk(company));
+    } else {
+      dispatch(createCompanyAdminThunk(company));
+    }
+
+    dispatch(clearActiveAdminCompany());
   };
 
   return (
     <Wrapper className="">
-      <h3>Crear una nueva instalacion</h3>
+      <h3>
+        {isEditingCompany
+          ? "Editar la  instalacion"
+          : "Crear una nueva instalacion"}
+      </h3>
       <form onSubmit={handleSubmit}>
         <InputComponent
           name="name"
@@ -117,9 +157,10 @@ const NewOrEditCompany = () => {
           onChange={onChangeFields}
         />
         <button type="submit" className="btn">
-          Crear instalacion
+          {isEditingCompany ? "Editar" : "Crear instalacion"}
         </button>
       </form>
+      <UploadImageForm />
     </Wrapper>
   );
 };

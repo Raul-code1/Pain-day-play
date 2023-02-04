@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import {
+  createCompanyAdminThunk,
   deleteCompanyAdminThunk,
   getAllCompaniesAdminThunk,
+  updateCompanyAdminThunk,
+  uploadCompanyImage,
 } from "./userAdminThunk";
 
 const companyInitialState = {
@@ -24,6 +27,7 @@ const initialState = {
   activeAdminCompany: { ...companyInitialState },
   isEditingCompany: false,
   companyIdForEdit: null,
+  imagePath: "",
 };
 
 export const userAdminSlice = createSlice({
@@ -53,6 +57,14 @@ export const userAdminSlice = createSlice({
     addPricing: (state) => {
       state.activeAdminCompany.pricing.push({ planName: "", price: 0 });
     },
+    clearActiveAdminCompany: (state) => {
+      state.activeAdminCompany = { ...companyInitialState };
+    },
+    setActiveCompanyForEdit: (state, { payload }) => {
+      state.isEditingCompany = true;
+      state.activeAdminCompany = payload.company;
+      state.companyIdForEdit = payload.id;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,6 +90,39 @@ export const userAdminSlice = createSlice({
       .addCase(deleteCompanyAdminThunk.rejected, (state, { payload }) => {
         state.isLoadingAdmin = false;
         toast.error(payload);
+      })
+      .addCase(createCompanyAdminThunk.pending, (state) => {
+        state.isLoadingAdmin = true;
+      })
+      .addCase(createCompanyAdminThunk.fulfilled, (state, { payload }) => {
+        state.isLoadingAdmin = false;
+        toast.success(payload);
+      })
+      .addCase(createCompanyAdminThunk.rejected, (state, { payload }) => {
+        state.isLoadingAdmin = false;
+        toast.error(payload);
+      })
+      .addCase(uploadCompanyImage.pending, (state) => {
+        state.isLoadingAdmin = true;
+      })
+      .addCase(uploadCompanyImage.fulfilled, (state, { payload }) => {
+        state.isLoadingAdmin = false;
+        state.imagePath = payload;
+        toast.success("Image subida al servidor correctamente");
+      })
+      .addCase(uploadCompanyImage.rejected, (state, { payload }) => {
+        toast.error(payload);
+      })
+      .addCase(updateCompanyAdminThunk.pending, (state) => {
+        state.isLoadingAdmin = true;
+      })
+      .addCase(updateCompanyAdminThunk.fulfilled, (state, { payload }) => {
+        state.isLoadingAdmin = false;
+        toast.success(payload);
+      })
+      .addCase(updateCompanyAdminThunk.rejected, (state, { payload }) => {
+        state.isLoadingAdmin = false;
+        toast.error(payload);
       });
   },
 });
@@ -88,4 +133,6 @@ export const {
   handleChangeActiveCompany,
   handleChangePricing,
   addPricing,
+  clearActiveAdminCompany,
+  setActiveCompanyForEdit,
 } = userAdminSlice.actions;

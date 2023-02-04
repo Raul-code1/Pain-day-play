@@ -5,10 +5,36 @@ import { useDispatch } from "react-redux";
 
 import { deleteCompanyAdminThunk } from "../../feautres/userAdmin/userAdminThunk";
 import { Link } from "react-router-dom";
+import { setActiveCompanyForEdit } from "../../feautres/userAdmin/userAdminSlice";
 
-const CompanyItem = ({ _id, name }) => {
+const CompanyItem = ({
+  _id,
+  name,
+  location,
+  description,
+  category,
+  pricing,
+  image,
+  contactPhone,
+  website,
+}) => {
   const dispatch = useDispatch();
   //todo:delete company function
+
+  const handleEditCompanyClick = () => {
+    const company = {
+      name,
+      location,
+      description,
+      category,
+      pricing,
+      image,
+      contactPhone,
+      website,
+    };
+    dispatch(setActiveCompanyForEdit({ id: _id, company }));
+  };
+
   return (
     <Wrapper>
       <p>
@@ -16,7 +42,10 @@ const CompanyItem = ({ _id, name }) => {
       </p>
       <div className="companies-btns-admin">
         <div className="edit-admin-btn">
-          <Link to="/admin/dashboard/create-update">
+          <Link
+            to="/admin/dashboard/create-update"
+            onClick={handleEditCompanyClick}
+          >
             <GrEdit />
           </Link>
         </div>

@@ -5,3 +5,5 @@ export { default as CompanyComments } from "./CompanyComments";
 export { default as CompanyItem } from "./CompanyItem";
 export { default as FilterBar } from "./FilterBar";
 export { default as SelectComponents } from "./SelectComponents";
+export { default as UploadImageForm } from "./UploadImageForm";
+export * from "./index";

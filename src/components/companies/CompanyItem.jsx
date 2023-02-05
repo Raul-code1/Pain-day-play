@@ -19,7 +19,6 @@ const CompanyItem = ({
   website,
 }) => {
   const dispatch = useDispatch();
-  //todo:delete company function
 
   const handleEditCompanyClick = () => {
     const company = {
@@ -50,7 +49,9 @@ const CompanyItem = ({
           </Link>
         </div>
         <div className="delete-admin-btn">
-          <FiTrash />
+          <div onClick={() => dispatch(deleteCompanyAdminThunk(_id))}>
+            <FiTrash />
+          </div>
         </div>
       </div>
     </Wrapper>

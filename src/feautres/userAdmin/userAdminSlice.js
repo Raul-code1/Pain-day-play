@@ -65,6 +65,9 @@ export const userAdminSlice = createSlice({
       state.activeAdminCompany = payload.company;
       state.companyIdForEdit = payload.id;
     },
+    setIsEditingToFalse: (state) => {
+      state.isEditingCompany = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -135,4 +138,5 @@ export const {
   addPricing,
   clearActiveAdminCompany,
   setActiveCompanyForEdit,
+  setIsEditingToFalse,
 } = userAdminSlice.actions;

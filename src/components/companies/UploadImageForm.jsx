@@ -16,7 +16,7 @@ const UploadImageForm = () => {
 
   const handleImageSubmit = (e) => {
     e.preventDefault();
-    if (!imageFile) return toast.error("Por selecciona un archivo");
+    if (!imageFile) return toast.warn("Por selecciona un archivo");
     dispatch(uploadCompanyImage(imageFile));
   };
 
@@ -29,7 +29,7 @@ const UploadImageForm = () => {
           accept="image/*"
           onChange={handleUploadImageChange}
         />
-        <button className="btn"> Submit imagen </button>
+        <button className="btn"> Subir imagen </button>
       </form>
       <div>
         <p>Ruta de la imagen: {imagePath} </p>

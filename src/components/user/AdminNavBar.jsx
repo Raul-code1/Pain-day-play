@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+import { setIsEditingToFalse } from "../../feautres/userAdmin/userAdminSlice";
 
 const adminNavLinks = [
   { id: 0, text: "Instalaciones", path: "/admin/dashboard" },
@@ -11,12 +14,19 @@ const adminNavLinks = [
 ];
 
 const AdminNavBar = () => {
+  const dispatch = useDispatch();
+
   return (
     <Wrapper>
       <div className="admin-links-container">
         {adminNavLinks.map((l, i) => {
           return (
-            <Link to={l.path} key={l.id} className="link">
+            <Link
+              onClick={() => dispatch(setIsEditingToFalse())}
+              to={l.path}
+              key={l.id}
+              className="link"
+            >
               {l.text}
             </Link>
           );
